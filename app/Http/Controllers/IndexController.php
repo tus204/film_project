@@ -18,8 +18,8 @@ class IndexController extends Controller
     public function episode(){
         return view("pages.episode");
     }
-    public function gerne(){
-        return view("pages.gerne");
+    public function genre(){
+        return view("pages.genre");
     }
     public function movie(){
         return view("pages.movie");

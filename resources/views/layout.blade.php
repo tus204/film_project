@@ -60,7 +60,9 @@
                 </div>
             </div>
             <div class="col-md-4 hidden-xs">
-                <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span class="count">0</span></div>
+                <a href="{{ route('login') }}">
+                    <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span class="count">0</span></div>
+                </a>
                 <div id="bookmark-list" class="hidden bookmark-list-on-pc">
                     <ul style="margin: 0;"></ul>
                 </div>
@@ -104,7 +106,7 @@
                     <li class="mega dropdown">
                         <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
-                            <li><a title="Tâm Lý" href="{{ route('category') }}">Thể loại</a></li>
+                            <li><a title="Tâm Lý" href="{{ route('genre') }}">Thể loại</a></li>
                         </ul>
                     </li>
                     <li class="mega dropdown">
