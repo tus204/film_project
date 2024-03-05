@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -19,7 +20,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $list = Category::all();
+        return view("adminCP.category.form", compact("list"));
     }
 
     /**
@@ -27,7 +29,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $category = new Category();
+        $category->title = $data["title"];
+        $category->description = $data["desc"];
+        $category->status = $data["status"];
+        $category->save();
+        return redirect()->back()->with("success","");
     }
 
     /**
@@ -43,7 +51,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        $list = Category::all();
+        return view("adminCP.category.form", compact('list','category'));
     }
 
     /**
@@ -51,7 +61,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $category = Category::find($id);
+        $category->title = $data["title"];
+        $category->description = $data["desc"];
+        $category->status = $data["status"];
+        $category->save();
+        return redirect()->back()->with("success","");
     }
 
     /**
@@ -59,6 +75,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::find($id)->delete();
+        return redirect()->back()->with("success","");
     }
 }
