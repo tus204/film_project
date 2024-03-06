@@ -23,12 +23,12 @@ use App\Http\Controllers\EpisodeController;
 */
 
 Route::get('/', [IndexController::class,'home'])->name('homepage');
-Route::get('/category', [IndexController::class,'category'])->name('category');
-Route::get('/country', [IndexController::class,'country'])->name('country');
-Route::get('/episode', [IndexController::class,'episode'])->name('episode');
-Route::get('/genre', [IndexController::class,'genre'])->name('genre');
-Route::get('/movie', [IndexController::class,'movie'])->name('movie');
-Route::get('/watch', [IndexController::class,'watch'])->name('watch');
+Route::get('/category-film/{slug}', [IndexController::class,'category'])->name('category');
+Route::get('/country-film/{slug}', [IndexController::class,'country'])->name('country');
+Route::get('/genre-film/{slug}', [IndexController::class,'genre'])->name('genre');
+Route::get('/episode-film', [IndexController::class,'episode'])->name('episode');
+Route::get('/movie-film', [IndexController::class,'movie'])->name('movie');
+Route::get('/watch-film', [IndexController::class,'watch'])->name('watch');
 
 Auth::routes();
 

@@ -23,10 +23,14 @@
                         @csrf
                         <div class="form-group">
                             {!! Form::label('title', 'Title', []) !!}
-                            {!! Form::text('title', isset($genre) ? $genre->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'title']) !!}
+                            {!! Form::text('title', isset($genre) ? $genre->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description', []) !!}
+                            {!! Form::label('slug', 'Slug', []) !!}
+                            {!! Form::text('slug', isset($genre) ? $genre->slug : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'convert_slug']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('status', 'Status', []) !!}
                             {!! Form::textarea('desc', isset($genre) ? $genre->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
                         </div>
                         <div class="form-group">
@@ -47,6 +51,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Slug</th>
                     <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Handle</th>
@@ -57,6 +62,7 @@
                         <tr>
                             <th scope="row">{{ $genre->id }}</th>
                             <td>{{ $genre->title }}</td>
+                            <td>{{ $genre->slug }}</td>
                             <td>{{ $genre->description }}</td>
                             <td>
                                 @if ($genre->status == 1)

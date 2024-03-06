@@ -23,14 +23,18 @@
                         @csrf
                         <div class="form-group">
                             {!! Form::label('title', 'Title', []) !!}
-                            {!! Form::text('title', isset($category) ? $category->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'title']) !!}
+                            {!! Form::text('title', isset($category) ? $category->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('slug', 'Slug', []) !!}
+                            {!! Form::text('slug', isset($category) ? $category->slug : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'convert_slug']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('desc', 'Description', []) !!}
-                            {!! Form::textarea('desc', isset($category) ? $category->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
+                            {!! Form::textarea('desc', isset($category) ? $category->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => '']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description', []) !!}
+                            {!! Form::label('status', 'Status', []) !!}
                             {!! Form::select('status', ['1' => 'Active', '2' => 'Inactive'], isset($category) ? $category->status : '', ['class' => 'form-control mb-4']) !!}
                         </div>
                         @if (!isset($category))
@@ -47,6 +51,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Slug</th>
                     <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Handle</th>
@@ -57,6 +62,7 @@
                         <tr>
                             <th scope="row">{{ $cate->id }}</th>
                             <td>{{ $cate->title }}</td>
+                            <td>{{ $cate->slug }}</td>
                             <td>{{ $cate->description }}</td>
                             <td>
                                 @if ($cate->status == 1)

@@ -23,14 +23,18 @@
                         @csrf
                         <div class="form-group">
                             {!! Form::label('title', 'Title', []) !!}
-                            {!! Form::text('title', isset($country) ? $country->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'title']) !!}
+                            {!! Form::text('title', isset($country) ? $country->title : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('slug', 'Slug', []) !!}
+                            {!! Form::text('slug', isset($country) ? $country->slug : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'convert_slug']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('desc', 'Description', []) !!}
                             {!! Form::textarea('desc', isset($country) ? $country->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description', []) !!}
+                            {!! Form::label('status', 'Satus', []) !!}
                             {!! Form::select('status', ['1' => 'Active', '2' => 'Inactive'], isset($country) ? $country->status : '', ['class' => 'form-control mb-4']) !!}
                         </div>
                         @if (!isset($country))
@@ -47,6 +51,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Slug</th>
                     <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Handle</th>
@@ -57,6 +62,7 @@
                         <tr>
                             <th scope="row">{{ $country->id }}</th>
                             <td>{{ $country->title }}</td>
+                            <td>{{ $country->slug }}</td>
                             <td>{{ $country->description }}</td>
                             <td>
                                 @if ($country->status == 1)

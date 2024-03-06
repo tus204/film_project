@@ -95,6 +95,10 @@
                 <div class="menu-menu_1-container">
                     <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
                     <li class="current-menu-item active"><a title="Trang Chủ" href="{{ route('homepage') }}">Trang Chủ</a></li>
+                    @foreach ($category as $cate)
+                        <li><a class="mega" title="{{ $cate->title }}" href="{{ route('category', $cate->slug) }}">{{ $cate->title }}</a></li>
+                    @endforeach
+                    
                     {{-- <li class="mega dropdown">
                         <a title="Năm" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Năm <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
@@ -106,13 +110,17 @@
                     <li class="mega dropdown">
                         <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
-                            <li><a title="Tâm Lý" href="{{ route('genre') }}">Thể loại</a></li>
+                            @foreach ($genre as $ge)
+                            <li><a title="{{ $ge->title }}" href="{{ route('genre', $ge->slug) }}">{{ $ge->title }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="mega dropdown">
                         <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
-                            <li><a title="Việt nam" href="{{ route('country') }}">Quốc gia</a></li>
+                            @foreach ($country as $ctr)
+                                <li><a title="{{ $ctr->title }}" href="{{ route('country', $ctr->slug) }}">{{ $ctr->title }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a title="Phim Sexx" href="danhmuc.php">Phim S*x</a></li>
