@@ -9,4 +9,5 @@ class Country extends Model
 {
     public $timestamps = false;
     use HasFactory;
+    protected $guarded = ['_token'];
 }

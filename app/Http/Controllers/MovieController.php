@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Genre;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -9,6 +13,12 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $movie;
+
+    public function __construct(Movie $movie)
+    {
+        $this->movie = $movie;
+    }
     public function index()
     {
         //
@@ -20,6 +30,11 @@ class MovieController extends Controller
     public function create()
     {
         //
+        $category = Category::pluck("title", "id");
+        $country = Country::pluck("title", "id");
+        $genre = Genre::pluck("title", "id");
+        $list = Movie::with('category', 'country', 'genre')->orderBy("id", "desc")->get();
+        return view("adminCP.movie.form", compact("list", "category", "country", "genre"));
     }
 
     /**
@@ -28,6 +43,30 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+
+        $this->movie->title = $data["title"];
+        $this->movie->slug = $data["slug"];
+        $this->movie->status = $data["status"];
+        $this->movie->description = $data["description"];
+        $this->movie->category_id = $data["category_id"];
+        $this->movie->country_id = $data["country_id"];
+        $this->movie->genre_id = $data["genre_id"];
+        //upload image
+        $get_image = $request->file('image');
+        // $path = public_path('uploads/movies');
+        if ($get_image) {
+            $get_name_image = $get_image->getClientOriginalName(); // image.jpg bla bla
+            $name_image = current(explode('.', $get_name_image)); // [0] => image . [1] => jpg
+            $new_image = date("Y-m-d_H-i-s", time()) . '_' . $name_image . '.' . $get_image->getClientOriginalExtension(); // => image_time().jpg
+            $get_image->move('uploads/movies', $new_image);
+            $this->movie->image = $new_image;
+        }
+
+        $this->movie->save();
+
+        // rediẻct
+        return redirect()->back()->with("status", "Thêm phim thành công");
     }
 
     /**
@@ -35,7 +74,7 @@ class MovieController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //        
     }
 
     /**
@@ -44,6 +83,12 @@ class MovieController extends Controller
     public function edit(string $id)
     {
         //
+        $category = Category::pluck("title", "id");
+        $country = Country::pluck("title", "id");
+        $genre = Genre::pluck("title", "id");
+        $list = Movie::orderBy("id", "desc")->get();
+        $movie = $this->movie->find($id);
+        return view("adminCP.movie.form", compact("list", "category", "country", "genre", "movie"));
     }
 
     /**
@@ -52,6 +97,34 @@ class MovieController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->all();
+
+        $movie = $this->movie->find($id);
+        $movie->title = $data["title"];
+        $movie->slug = $data["slug"];
+        $movie->status = $data["status"];
+        $movie->description = $data["description"];
+        $movie->category_id = $data["category_id"];
+        $movie->country_id = $data["country_id"];
+        $movie->genre_id = $data["genre_id"];
+        //upload image
+        $get_image = $request->file('image');
+        // $path = public_path('uploads/movies');
+        if ($get_image) {
+            if (!empty ($movie->image)) {
+                unlink('uploads/movies/' . $movie->image);
+            }
+            $get_name_image = $get_image->getClientOriginalName(); // image.jpg bla bla
+            $name_image = current(explode('.', $get_name_image)); // [0] => image . [1] => jpg
+            $new_image = date("Y-m-d_H-i-s", time()) . '_' . $name_image . '.' . $get_image->getClientOriginalExtension(); // => image_time().jpg
+            $get_image->move('uploads/movies', $new_image);
+            $movie->image = $new_image;
+        }
+
+        $movie->save();
+
+        // rediẻct
+        return redirect()->back()->with("status", "Cập nhật phim thành công");
     }
 
     /**
@@ -60,5 +133,19 @@ class MovieController extends Controller
     public function destroy(string $id)
     {
         //
+        $movie = Movie::find($id);
+        if ($movie) {
+            if (!empty ($movie->image)) {
+                if (file_exists('uploads/movies/' . $movie->image)) {
+                    unlink('uploads/movies/' . $movie->image);
+                }
+            }
+            $movie->delete();
+            return redirect()->back()->with("status", "Successfully");
+        } else {
+            return redirect()->back()->with("status", "failed");
+        }
+        
+        
     }
 }

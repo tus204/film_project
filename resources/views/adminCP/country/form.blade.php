@@ -30,8 +30,8 @@
                             {!! Form::text('slug', isset($country) ? $country->slug : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'convert_slug']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description', []) !!}
-                            {!! Form::textarea('desc', isset($country) ? $country->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
+                            {!! Form::label('description', 'Description', []) !!}
+                            {!! Form::textarea('description', isset($country) ? $country->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'description']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('status', 'Satus', []) !!}
