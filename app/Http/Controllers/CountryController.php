@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+// use App\Models\ProductImages;
 
 class CountryController extends Controller
 {
@@ -29,14 +30,15 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $country = new Country();
-        $country->title = $data["title"];
-        $country->slug = $data["slug"];
-        $country->description = $data["desc"];
-        $country->status = $data["status"];
-        $country->save();
+        // $data = $request->all();
+        $country = Country::create($request->all());
+        // $country->title = $data["title"];
+        // $country->slug = $data["slug"];
+        // $country->description = $data["desc"];
+        // $country->status = $data["status"];
+        // $country->save();
         return redirect()->back()->with("success","");
+
     }
 
     /**

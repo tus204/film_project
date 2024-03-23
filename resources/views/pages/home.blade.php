@@ -37,11 +37,11 @@
         <div class="clearfix"></div>
     </div>
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
-        @foreach ($collection as $item)
+        @foreach ($category as $cate)
         <section id="halim-advanced-widget-2">
             <div class="section-heading">
-                <a href="danhmuc.php" title="Phim Bộ">
-                <span class="h-text">Phim Bộ</span>
+                <a href="danhmuc.php" title="{{ $cate->title }}">
+                <span class="h-text">{{ $cate->title }}</span>
                 </a>
             </div>
             <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
