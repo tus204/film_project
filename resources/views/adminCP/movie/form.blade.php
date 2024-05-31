@@ -6,6 +6,7 @@
         <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-header">{{ __('Movie Management') }}</div>
+                <a href="{{ route('movie.index') }}" class="btn btn-primary col-2 m-3">Detail</a>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -30,6 +31,10 @@
                             {!! Form::text('slug', isset($movie) ? $movie->slug : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'convert_slug']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('eng name', 'Eng Name', []) !!}
+                            {!! Form::text('name_eng', isset($movie) ? $movie->name_eng : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('Description', 'Description', []) !!}
                             {!! Form::textarea('description', isset($movie) ? $movie->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
                         </div>
@@ -50,6 +55,10 @@
                             {!! Form::select('genre_id', $genre, isset($movie) ? $movie->genre_id : '', ['class' => 'form-control mb-4']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('Hot', 'Hot', []) !!}
+                            {!! Form::select('phim_hot', ['1' => 'Có', '0' => 'Không'], isset($movie) ? $movie->phim_hot : '', ['class' => 'form-control mb-4']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('Image', 'Image', []) !!}
                             {{-- {!! Form::file('image', ['class' => 'form-control mb-4 mt-2']) !!} --}}
                             <input type="file" name="image" id="" class="form-control mb-4 mt-2">
@@ -66,7 +75,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <table class="table">
+            {{-- <table class="table" id="movieTable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -77,6 +86,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Genre</th>
                     <th scope="col">Country</th>
+                    <th scope="col">Hot</th>
                     <th scope="col">Status</th>
                     <th scope="col">Handle</th>
                 </tr>
@@ -92,6 +102,13 @@
                             <td>{{ $movie->category->title }}</td>
                             <td>{{ $movie->genre->title }}</td>
                             <td>{{ $movie->country->title }}</td>
+                            <td>
+                                @if ($movie->phim_hot == 1)
+                                    Yes
+                                @else
+                                    No
+                                @endif
+                            </td>
                             <td>
                                 @if ($movie->status == 1)
                                     Active
@@ -113,7 +130,7 @@
                         </tr>
                     @endforeach                
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 </div>

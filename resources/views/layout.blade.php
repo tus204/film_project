@@ -8,7 +8,7 @@
     <meta content="VN" name="geo.region" />
     <meta name="DC.language" scheme="utf-8" content="vi" />
     <meta name="language" content="Việt Nam">
-    <link rel="shortcut icon" href="{{ asset('images/logo_poly.png') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('image/') }}" type="image/x-icon" />
     <meta name="revisit-after" content="1 days" />
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
     <title>Web phim đen của bố Tú</title>
@@ -27,7 +27,7 @@
     <link rel='dns-prefetch' href='//s.w.org' />
     <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/bootstrap.min.css?ver=5.7.2') }}' media='all' />
     <link rel='stylesheet' id='style-css' href='{{ asset('css/style.css?ver=5.7.2') }}' media='all' />
-    <link rel='stylesheet' id='wp-block-library-css' href='{{ asset('css/style.css?ver=5.7.2') }}' media='all' />
+    <link rel='stylesheet' id='wp-block-library-css' href='{{ asset('css/style.css?ver=5.7.2') }}' media='all' />       
     <script type='text/javascript' src='{{ asset('js/jquery.min.js?ver=5.7.2') }}' id='halim-jquery-js'></script>
     <style type="text/css" id="wp-custom-css">
         .textwidget p a img {
@@ -161,8 +161,8 @@
     </footer>
     <div id='easy-top'></div>
     <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=5.7.2') }}' id='bootstrap-js'></script>
-    <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=5.7.2') }}' id='carousel-js'></script>
-    <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=5.7.2') }}' id='halim-init-js'></script>
+    <script type='text/javascript' src='{{ asset('js/owl.carousel.min.js?ver=5.7.2') }}' id='carousel-js'></script>
+    <script type='text/javascript' src='{{ asset('js/halimtheme-core.min.js?ver=5.7.2') }}' id='halim-init-js'></script>    
     <style>#overlay_mb{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.7);z-index:99999;cursor:pointer}#overlay_mb .overlay_mb_content{position:relative;height:100%}.overlay_mb_block{display:inline-block;position:relative}#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:600px;height:auto;position:relative;left:50%;top:50%;transform:translate(-50%, -50%);text-align:center}#overlay_mb .overlay_mb_content .cls_ov{color:#fff;text-align:center;cursor:pointer;position:absolute;top:5px;right:5px;z-index:999999;font-size:14px;padding:4px 10px;border:1px solid #aeaeae;background-color:rgba(0, 0, 0, 0.7)}#overlay_mb img{position:relative;z-index:999}@media only screen and (max-width: 768px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:400px;top:3%;transform:translate(-50%, 3%)}}@media only screen and (max-width: 400px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:310px;top:3%;transform:translate(-50%, 3%)}}</style>
     <style>
         #overlay_pc {
@@ -235,5 +235,38 @@
         span.bannermobi2 img {height: 70px;width: 300px;}
         #hide_float_right a { background: #01AEF0; padding: 5px 5px 1px 5px; color: #FFF;float: left;}
     </style>
+
+    {{-- slider --}}
+    <script>
+        jQuery(document).ready(function($) {
+            var owl = $('#halim_related_movies-2');
+            owl.owlCarousel({
+                loop: true,
+                margin: 4,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                nav: true,
+                navText: ['<i class="hl-down-open rotate-left"></i>',
+                    '<i class="hl-down-open rotate-right"></i>'
+                ],
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    480: {
+                        items: 3
+                    },
+                    600: {
+                        items: 4
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            })
+        });
+        </script>
 </body>
 </html>

@@ -13,7 +13,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        // detail
+        $list = Country::all();
+        return view("adminCP.country.index", compact("list"));
     }
 
     /**
@@ -21,8 +23,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $list = Country::all();
-        return view("adminCP.country.form", compact("list"));
+        // $list = Country::all();
+        return view("adminCP.country.form");
     }
 
     /**
@@ -30,14 +32,15 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $country = Country::create($request->all());
-        // $country->title = $data["title"];
-        // $country->slug = $data["slug"];
-        // $country->description = $data["desc"];
-        // $country->status = $data["status"];
-        // $country->save();
-        return redirect()->back()->with("success","");
+        $country = new Country();
+        $data = $request->all();
+        // $country = Country::create($request->all());
+        $country->title = $data["title"];
+        $country->slug = $data["slug"];
+        $country->description = $data["desc"];
+        $country->status = $data["status"];
+        $country->save();
+        return redirect()->back()->with("status","Thêm phim thành công");
 
     }
 
@@ -71,7 +74,7 @@ class CountryController extends Controller
         $country->description = $data["desc"];
         $country->status = $data["status"];
         $country->save();
-        return redirect()->back()->with("success","");
+        return redirect()->back()->with("status","Sửa phim thành công");
     }
 
     /**
@@ -80,6 +83,6 @@ class CountryController extends Controller
     public function destroy(string $id)
     {
         Country::find($id)->delete();
-        return redirect()->back()->with("success","");
+        return redirect()->back()->with("status","Xóa phim thành công");
     }
 }
