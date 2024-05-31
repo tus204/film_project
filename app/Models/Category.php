@@ -10,4 +10,8 @@ class Category extends Model
     public $timestamps = false;
     // protected $table = "genres";
     use HasFactory;
+
+    public function movie() {
+        return $this->hasMany(Movie::class)->orderBy("id","desc");
+    }
 }

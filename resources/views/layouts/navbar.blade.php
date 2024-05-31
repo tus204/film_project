@@ -16,7 +16,7 @@
         <a class="nav-link" href="{{ route('country.create') }}">Country</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="{{ route('movie.create') }}">Movie</a>
+        <a class="nav-link" href="{{ route('movie.index') }}">Movie</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="{{ route('episode.create') }}">Episode</a>

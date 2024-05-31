@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Country Management') }}</div>
-
+                <a href="{{ route('country.index') }}" class="btn btn-primary col-2 m-3">Detail</a>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('description', 'Description', []) !!}
-                            {!! Form::textarea('description', isset($country) ? $country->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'description']) !!}
+                            {!! Form::textarea('desc', isset($country) ? $country->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'description']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('status', 'Satus', []) !!}
@@ -46,7 +46,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <table class="table">
+            {{-- <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -84,7 +84,7 @@
                         </tr>
                     @endforeach                
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 </div>

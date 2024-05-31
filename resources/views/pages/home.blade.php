@@ -1,12 +1,12 @@
 @extends('layout')
 @section('content')
-<div class="row container" id="wrapper">
+<div class="row container" id="wrapper">    
     <div class="halim-panel-filter">
         <div id="ajax-filter" class="panel-collapse collapse" aria-expanded="true" role="menu">
             <div class="ajax"></div>
         </div>
     </div>
-    <div class="col-xs-12 carausel-sliderWidget">
+    {{-- <div class="col-xs-12 carausel-sliderWidget">
         <section id="halim-advanced-widget-4">
             <div class="section-heading">
                 <a href="danhmuc.php" title="Phim Chiếu Rạp">
@@ -35,7 +35,36 @@
             </div>
         </section>
         <div class="clearfix"></div>
+    </div> --}}
+    <div id="halim_related_movies-2xx" class="wrap-slider">
+        <div class="section-bar clearfix">
+            <h3 class="section-title"><span>PHIM HOT</span></h3>
+        </div>
+        <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
+            @foreach ($film_hot as $hot)               
+            
+            <article class="thumb grid-item post-38498">
+                <div class="halim-item">
+                    <a class="halim-thumb" href="chitiet.php" title="{{ $hot->title }}">
+                        <figure><img class="lazy img-responsive"
+                                src="{{ asset('uploads/movies/'. $hot->image) }}"
+                                alt="Đại Thánh Vô Song" title="{{ $hot->title }}"></figure>
+                        <span class="status">HD</span><span class="episode"><i class="fa fa-play"
+                                aria-hidden="true"></i>Vietsub</span>
+                        <div class="icon_overlay"></div>
+                        <div class="halim-post-title-box">
+                            <div class="halim-post-title ">
+                                <p class="entry-title">{{ $hot->title }}</p>
+                                <p class="original_title">{{ $hot->name_eng }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </article>
+            @endforeach
+        </div>        
     </div>
+    
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
         @foreach ($category as $cate)
         <section id="halim-advanced-widget-2">
@@ -43,26 +72,29 @@
                 <a href="danhmuc.php" title="{{ $cate->title }}">
                 <span class="h-text">{{ $cate->title }}</span>
                 </a>
-            </div>
+            </div>            
             <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
+                @foreach ($cate->movie->take(10) as $movie)
                 <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                 <div class="halim-item">
                     <a class="halim-thumb" href="chitiet.php">
-                        <figure><img class="lazy img-responsive" src="{{ asset('images/phim_dao_pho_piano.jpg') }}" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
+                        <figure><img class="lazy img-responsive" src="{{ asset('uploads/movies/'. $movie->image) }}" alt="{{ $movie->title }}" title="{{ $movie->title }}"></figure>
                         <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
                         <div class="icon_overlay"></div>
                         <div class="halim-post-title-box">
                             <div class="halim-post-title ">
-                            <p class="entry-title">Đào, Phở và Piano</p>
-                            <p class="original_title">Phim Hot</p>
+                            <p class="entry-title">{{ $movie->title }}</p>
+                            <p class="original_title">{{ $movie->name_eng }}</p>
                             </div>
                         </div>
                     </a>
                 </div>
-            </div>
-        </section>
-        @endforeach        
+                </article>
+                @endforeach
+            </div>            
+        </section>                
         <div class="clearfix"></div>
+        @endforeach
     </main>
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
         <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
