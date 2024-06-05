@@ -27,7 +27,7 @@ Route::get('/category-film/{slug}', [IndexController::class,'category'])->name('
 Route::get('/country-film/{slug}', [IndexController::class,'country'])->name('country');
 Route::get('/genre-film/{slug}', [IndexController::class,'genre'])->name('genre');
 Route::get('/episode-film', [IndexController::class,'episode'])->name('episode');
-Route::get('/movie-film', [IndexController::class,'movie'])->name('movie');
+Route::get('/film/{slug}', [IndexController::class,'movie'])->name('movie');
 Route::get('/watch-film', [IndexController::class,'watch'])->name('watch');
 
 Auth::routes();

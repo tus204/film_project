@@ -50,6 +50,7 @@ class MovieController extends Controller
         $movie->title = $data["title"];
         $movie->name_eng = $data["name_eng"];
         $movie->phim_hot = $data["phim_hot"];
+        $movie->resolution = $data["resolution"];
         $movie->slug = $data["slug"];
         $movie->status = $data["status"];
         $movie->description = $data["description"];
@@ -106,6 +107,7 @@ class MovieController extends Controller
         $movie->title = $data["title"];
         $movie->name_eng = $data["name_eng"];
         $movie->phim_hot = $data["phim_hot"];
+        $movie->resolution = $data["resolution"];
         $movie->slug = $data["slug"];
         $movie->status = $data["status"];
         $movie->description = $data["description"];

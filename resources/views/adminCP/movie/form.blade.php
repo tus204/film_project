@@ -39,8 +39,12 @@
                             {!! Form::textarea('description', isset($movie) ? $movie->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('desc', 'Active', []) !!}
-                            {!! Form::select('status', ['1' => 'Active', '2' => 'Inactive'], isset($movie) ? $movie->status : '', ['class' => 'form-control mb-4']) !!}
+                            {!! Form::label('active', 'Status', []) !!}
+                            {!! Form::select('status', ['0' => '', '1' => 'Active', '2' => 'Inactive'], isset($movie) ? $movie->status : '', ['class' => 'form-control mb-4']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('resolution', 'Resolution', []) !!}
+                            {!! Form::select('resolution', ['0' => 'HD', '1' => 'SD', '2' => 'HDCam', '3' => 'Cam', '4' => 'FullHD'], isset($movie) ? $movie->resolution : '', ['class' => 'form-control mb-4']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('Category', 'Category', []) !!}

@@ -19,6 +19,7 @@
                         <th scope="col">Genre</th>
                         <th scope="col">Country</th>
                         <th scope="col">Hot</th>
+                        <th scope="col">Resolution</th>
                         <th scope="col">Status</th>
                         <th scope="col">Handle</th>
                     </tr>
@@ -39,6 +40,19 @@
                                         Yes
                                     @else
                                         No
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($movie->resolution == 0)
+                                        HD
+                                    @elseif ($movie->resolution == 1)
+                                        SD
+                                    @elseif ($movie->resolution == 2)
+                                        HDCam
+                                    @elseif ($movie->resolution == 3)
+                                        Cam
+                                    @else
+                                        FullHD
                                     @endif
                                 </td>
                                 <td>

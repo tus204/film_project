@@ -45,11 +45,23 @@
             
             <article class="thumb grid-item post-38498">
                 <div class="halim-item">
-                    <a class="halim-thumb" href="chitiet.php" title="{{ $hot->title }}">
+                    <a class="halim-thumb" href="{{ route('movie', $hot->slug) }}" title="{{ $hot->title }}">
                         <figure><img class="lazy img-responsive"
                                 src="{{ asset('uploads/movies/'. $hot->image) }}"
                                 alt="Đại Thánh Vô Song" title="{{ $hot->title }}"></figure>
-                        <span class="status">HD</span><span class="episode"><i class="fa fa-play"
+                        <span class="status">
+                            @if ($hot->resolution == 0)
+                                HD
+                            @elseif ($hot->resolution == 1)
+                                SD
+                            @elseif ($hot->resolution == 2)
+                                HDCam
+                            @elseif ($hot->resolution == 3)
+                                Cam
+                            @else
+                                FullHD
+                            @endif    
+                        </span><span class="episode"><i class="fa fa-play"
                                 aria-hidden="true"></i>Vietsub</span>
                         <div class="icon_overlay"></div>
                         <div class="halim-post-title-box">
@@ -69,7 +81,7 @@
         @foreach ($category as $cate)
         <section id="halim-advanced-widget-2">
             <div class="section-heading">
-                <a href="danhmuc.php" title="{{ $cate->title }}">
+                <a href="{{ route('category', $cate->slug) }}" title="{{ $cate->title }}">
                 <span class="h-text">{{ $cate->title }}</span>
                 </a>
             </div>            
@@ -77,9 +89,21 @@
                 @foreach ($cate->movie->take(10) as $movie)
                 <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                 <div class="halim-item">
-                    <a class="halim-thumb" href="chitiet.php">
+                    <a class="halim-thumb" href="{{ route('movie', $movie->slug) }}">
                         <figure><img class="lazy img-responsive" src="{{ asset('uploads/movies/'. $movie->image) }}" alt="{{ $movie->title }}" title="{{ $movie->title }}"></figure>
-                        <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
+                        <span class="status">
+                            @if ($movie->resolution == 0)
+                                HD
+                            @elseif ($movie->resolution == 1)
+                                SD
+                            @elseif ($movie->resolution == 2)
+                                HDCam
+                            @elseif ($movie->resolution == 3)
+                                Cam
+                            @else
+                                FullHD
+                            @endif    
+                        </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
                         <div class="icon_overlay"></div>
                         <div class="halim-post-title-box">
                             <div class="halim-post-title ">
