@@ -46,8 +46,21 @@
                                 {{ $movie->title }}</h1>
                             <h2 class="movie-title title-2" style="font-size: 12px;">{{ $movie->name_eng }}</h2>
                             <ul class="list-info-group">
-                                <li class="list-info-group-item"><span>Trạng Thái</span> : <span
-                                        class="quality">HD</span><span class="episode">Vietsub</span></li>
+                                <li class="list-info-group-item"><span>Trạng Thái</span> : 
+                                    <span class="quality">
+                                        @if ($movie->resolution == 0)
+                                            HD
+                                        @elseif ($movie->resolution == 1)
+                                            SD
+                                        @elseif ($movie->resolution == 2)
+                                            HDCam
+                                        @elseif ($movie->resolution == 3)
+                                            Cam
+                                        @else
+                                            FullHD
+                                        @endif
+                                    </span>
+                                    <span class="episode">Vietsub</span></li>
                                 <li class="list-info-group-item"><span>Điểm IMDb</span> : <span
                                         class="imdb">7.2</span>
                                 </li>
@@ -116,7 +129,19 @@
                                 <a class="halim-thumb" href="{{ route('movie', $related->slug) }}" title="{{ $related->title }}">
                                     <figure><img class="lazy img-responsive"
                                             src="{{ asset('uploads/movies/' . $related->image) }}"></figure>
-                                    <span class="status">HD</span><span class="episode"><i class="fa fa-play"
+                                    <span class="status">
+                                        @if ($movie->resolution == 0)
+                                            HD
+                                        @elseif ($movie->resolution == 1)
+                                            SD
+                                        @elseif ($movie->resolution == 2)
+                                            HDCam
+                                        @elseif ($movie->resolution == 3)
+                                            Cam
+                                        @else
+                                            FullHD
+                                        @endif    
+                                    </span><span class="episode"><i class="fa fa-play"
                                             aria-hidden="true"></i>Vietsub</span>
                                     <div class="icon_overlay"></div>
                                     <div class="halim-post-title-box">

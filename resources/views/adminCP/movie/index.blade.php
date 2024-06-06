@@ -20,6 +20,7 @@
                         <th scope="col">Country</th>
                         <th scope="col">Hot</th>
                         <th scope="col">Resolution</th>
+                        <th scope="col">Subtitle</th>
                         <th scope="col">Status</th>
                         <th scope="col">Handle</th>
                     </tr>
@@ -53,6 +54,13 @@
                                         Cam
                                     @else
                                         FullHD
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($movie->subtitle == 0)
+                                        Phụ đề
+                                    @else
+                                        Thuyết minh
                                     @endif
                                 </td>
                                 <td>
