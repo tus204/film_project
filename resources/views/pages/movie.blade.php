@@ -60,11 +60,18 @@
                                             FullHD
                                         @endif
                                     </span>
-                                    <span class="episode">Vietsub</span></li>
+                                    <span class="episode">
+                                        @if ($movie->subtitle == 0)
+                                            Phụ đề
+                                        @else
+                                            Thuyết minh    
+                                        @endif
+                                    </span>
+                                </li>
                                 <li class="list-info-group-item"><span>Điểm IMDb</span> : <span
                                         class="imdb">7.2</span>
                                 </li>
-                                <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
+                                <li class="list-info-group-item"><span>Thời lượng</span> : {{ $movie->movie_time }}</li>
                                 <li class="list-info-group-item"><span>Danh mục phim</span> : 
                                     <a href="{{ route('category', $movie->category->slug) }}" rel="category tag">{{ $movie->category->title }}</a>
                                 </li>

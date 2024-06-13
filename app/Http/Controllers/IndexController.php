@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function home()
     {
-        $film_hot = Movie::where('phim_hot', 1)->where('status', 1)->get();
+        $film_hot = Movie::where('phim_hot', 1)->where('status', 1)->orderBy('updated_at', 'DESC')->get();
         $category = Category::with('movie')->orderBy('id', 'ASC')->where('status', 1)->get();
         $genre = Genre::where('status', 1)->orderBy('id', 'DESC')->get();
         $country = Country::where('status', 1)->orderBy('id', 'DESC')->get();
@@ -26,7 +26,7 @@ class IndexController extends Controller
         $cate_slug = Category::where('slug', $slug)->first();
         $genre = Genre::orderBy('id', 'DESC')->where('status', 1)->get();
         $country = Country::orderBy('id', 'desc')->where('status', 1)->get();
-        $movie = Movie::where('category_id', $cate_slug->id)->where('status', 1)->paginate(4);
+        $movie = Movie::where('category_id', $cate_slug->id)->where('status', 1)->orderBy('updated_at', 'DESC')->paginate(4);
         return view("pages.category", compact("category", "genre", "country", "cate_slug", "movie"));
     }
     public function country($slug)
@@ -35,7 +35,7 @@ class IndexController extends Controller
         $country_slug = Country::where('slug', $slug)->first();
         $genre = Genre::orderBy('id', 'DESC')->where('status', 1)->get();
         $country = Country::orderBy('id', 'desc')->where('status', 1)->get();
-        $movie = Movie::where('country_id', $country_slug->id)->where('status', 1)->paginate(4);
+        $movie = Movie::where('country_id', $country_slug->id)->where('status', 1)->orderBy('updated_at', 'DESC')->paginate(4);
         return view("pages.country", compact("category", "genre", "country", "country_slug", "movie"));
     }
     public function episode()
@@ -48,15 +48,24 @@ class IndexController extends Controller
         $genre_slug = Genre::where('slug', $slug)->first();
         $genre = Genre::orderBy('id', 'DESC')->where('status', 1)->get();
         $country = Country::orderBy('id', 'desc')->where('status', 1)->get();
-        $movie = Movie::where('genre_id', $genre_slug->id)->where('status', 1)->paginate(4);
+        $movie = Movie::where('genre_id', $genre_slug->id)->where('status', 1)->orderBy('updated_at', 'DESC')->paginate(4);
         return view("pages.genre", compact("category", "genre", "country", "genre_slug", "movie"));
+    }
+    public function year($year)
+    {
+        $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+        $year = $year;
+        $genre = Genre::orderBy('id', 'DESC')->where('status', 1)->get();
+        $country = Country::orderBy('id', 'desc')->where('status', 1)->get();
+        $movie = Movie::where('year', $year)->where('status', 1)->orderBy('updated_at', 'DESC')->paginate(4);
+        return view("pages.year", compact("category", "genre", "country", "year", "movie"));
     }
     public function movie($slug)
     {
         $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
         $genre = Genre::orderBy('id', 'DESC')->where('status', 1)->get();
         $country = Country::orderBy('id', 'desc')->where('status', 1)->get();
-        $movie = Movie::with('category', 'country', 'genre')->where('slug', $slug)->where('status', 1)->first();
+        $movie = Movie::with('category', 'country', 'genre')->where('slug', $slug)->where('status', 1)->orderBy('updated_at', 'DESC')->first();
         $movie_related = Movie::with('category', 'genre', 'country')->where('category_id', $movie->category->id)->orderBy(DB::raw('RAND()'))->whereNotIn('slug', [$slug])->get();
         return view("pages.movie", compact("category", "genre", "country", "movie", "movie_related"));
     }
