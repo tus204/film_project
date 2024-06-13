@@ -37,9 +37,15 @@
                                             <form method="POST" action="{{ route('country.destroy',$country->id) }}" onsubmit="return confirm('Are u sure wanna delete?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" style="margin-right: 5px">DELETE</button>
+                                                <button type="submit" class="btn btn-link text-danger p-0 m-0">
+                                                    <i class="bi bi-trash-fill fs-3"></i>
+                                                </button>
                                             </form>
-                                            <a href="{{ route('country.edit',$country->id) }}"><button class="btn btn-warning ">EDIT</button></a>
+                                            <a href="{{ route('country.edit',$country->id) }}">
+                                                <button type="button" class="btn btn-link text-primary p-0 m-0">
+                                                    <i class="bi bi-pencil-square fs-3"></i>
+                                                </button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

@@ -35,6 +35,10 @@
                             {!! Form::text('name_eng', isset($movie) ? $movie->name_eng : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('movie_time', 'Movie Time', []) !!}
+                            {!! Form::text('movie_time', isset($movie) ? $movie->movie_time : '', ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('Description', 'Description', []) !!}
                             {!! Form::textarea('description', isset($movie) ? $movie->description : '', ['style' => 'resize: none', 'class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'desc']) !!}
                         </div>

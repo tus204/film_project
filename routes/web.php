@@ -29,6 +29,7 @@ Route::get('/genre-film/{slug}', [IndexController::class,'genre'])->name('genre'
 Route::get('/episode-film', [IndexController::class,'episode'])->name('episode');
 Route::get('/film/{slug}', [IndexController::class,'movie'])->name('movie');
 Route::get('/watch-film', [IndexController::class,'watch'])->name('watch');
+Route::get('/year/{year}', [IndexController::class,'year']);
 
 Auth::routes();
 
@@ -40,4 +41,6 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 Route::resource('episode', EpisodeController::class);
+
+// Route::get('update-year-film', [MovieController::class, 'update_year']);
 

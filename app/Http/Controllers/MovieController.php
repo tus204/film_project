@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
 use App\Models\Movie;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -22,9 +23,18 @@ class MovieController extends Controller
     public function index()
     {
         // detail
-        $list = Movie::with('category', 'country', 'genre')->orderBy("id", "desc")->get();
+        $list = Movie::with('category', 'country', 'genre')->orderBy('updated_at', 'DESC')->get();
+        // dd($list);
         return view("adminCP.movie.index", compact("list"));
     }
+
+    // public function update_year(Request $request) 
+    // {
+    //     $data = $request->all();
+    //     $movie = Movie::find($data['id_film']);
+    //     $movie->year = $data['year'];
+    //     $movie->save();
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -49,6 +59,7 @@ class MovieController extends Controller
         $movie = new Movie;
         $movie->title = $data["title"];
         $movie->name_eng = $data["name_eng"];
+        $movie->movie_time = $data["movie_time"];
         $movie->phim_hot = $data["phim_hot"];
         $movie->resolution = $data["resolution"];
         $movie->subtitle = $data["subtitle"];
@@ -58,6 +69,8 @@ class MovieController extends Controller
         $movie->category_id = $data["category_id"];
         $movie->country_id = $data["country_id"];
         $movie->genre_id = $data["genre_id"];
+        $movie->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $movie->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         //upload image
         $get_image = $request->file('image');
         // $path = public_path('uploads/movies');
@@ -105,22 +118,30 @@ class MovieController extends Controller
         $data = $request->all();
 
         $movie = Movie::find($id);
-        $movie->title = $data["title"];
-        $movie->name_eng = $data["name_eng"];
-        $movie->phim_hot = $data["phim_hot"];
-        $movie->resolution = $data["resolution"];
-        $movie->subtitle = $data["subtitle"];
-        $movie->slug = $data["slug"];
-        $movie->status = $data["status"];
-        $movie->description = $data["description"];
-        $movie->category_id = $data["category_id"];
-        $movie->country_id = $data["country_id"];
-        $movie->genre_id = $data["genre_id"];
+
+        if (isset($data['year'])) {
+            $movie->year = $data['year'];
+        } else {
+            $movie->title = $data["title"];
+            $movie->name_eng = $data["name_eng"];
+            $movie->movie_time = $data["movie_time"];
+            $movie->phim_hot = $data["phim_hot"];
+            $movie->resolution = $data["resolution"];
+            $movie->subtitle = $data["subtitle"];
+            $movie->slug = $data["slug"];
+            $movie->status = $data["status"];
+            $movie->description = $data["description"];
+            $movie->category_id = $data["category_id"];
+            $movie->country_id = $data["country_id"];
+            $movie->genre_id = $data["genre_id"];
+        }
+        
+        $movie->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         //upload image
         $get_image = $request->file('image');
         // $path = public_path('uploads/movies');
         if ($get_image) {
-            if (!empty ($movie->image)) {
+            if (file_exists('uploads/movies/' . $movie->image)) {
                 unlink('uploads/movies/' . $movie->image);
             }
             $get_name_image = $get_image->getClientOriginalName(); // image.jpg bla bla
@@ -131,6 +152,10 @@ class MovieController extends Controller
         }
 
         $movie->save();
+
+        if ($request->ajax()) {
+            return response()->json();
+        }
 
         // rediẻct
         return redirect()->back()->with("status", "Cập nhật phim thành công");

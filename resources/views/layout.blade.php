@@ -116,6 +116,14 @@
                         </ul>
                     </li>
                     <li class="mega dropdown">
+                        <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Năm Phim <span class="caret"></span></a>
+                        <ul role="menu" class=" dropdown-menu">
+                            @for ($year = 1975; $year <= 2024; $year++)
+                                <li><a title="{{ $year }}" href="{{ url('year/' . $year) }}">{{ $year }}</a></li>
+                            @endfor
+                        </ul>
+                    </li>
+                    <li class="mega dropdown">
                         <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
                             @foreach ($country as $ctr)

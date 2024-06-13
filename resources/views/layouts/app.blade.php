@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     {{-- Bootstrap --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"> 
 
@@ -25,7 +26,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -80,7 +81,7 @@
 
         <main class="py-4">
             @if (Auth::check())
-            <div class="container">
+            <div class="container-fluid">
                 @include('layouts.navbar')
             </div>
             @endif            
@@ -92,7 +93,24 @@
 
         <script type="text/javascript">
 
-            let table = new DataTable('#movieTable');
+            let table = new DataTable('#movieTable', {
+                order: []
+            });
+
+            $('.select-year').change( function() {
+                var year = $(this).find(':selected').val()
+                var id_film = $(this).attr('id')
+                // alert(year)
+                // alert(id_film)
+                $.ajax({
+                    url: "/movie/" + id_film,
+                    method: "PUT",
+                    data: {year: year, _token: '{{ csrf_token() }}'},
+                    success: function() {
+                        alert('Thay đổi năm phim thành ' + year + ' thành công')
+                    }
+                })
+            })
 
             function ChangeToSlug()
                 {
